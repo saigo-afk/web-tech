@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookStore - Your Online Book Paradise</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">📚 BookStore</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Browse</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li>
+                        <a href="reading-list.html" class="cart-icon">
+                            📖
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li><a href="backend/admin-login.html" style="color: #e74c3c; font-weight: bold;">🔐 Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to BookStore</h1>
+        <p>Read Books Online - Free & Unlimited</p>
+        <a href="shop.html" class="btn">Start Reading</a>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Featured Books Section -->
+        <section class="featured">
+            <h2 class="section-title">Featured Books</h2>
+            <div class="books-grid">
+                <!-- Book 1 -->
+                <div class="book-card">
+                    <div class="book-cover">📖</div>
+                    <div class="book-info">
+                        <h3 class="book-title">The Great Gatsby</h3>
+                        <p class="book-author">F. Scott Fitzgerald</p>
+                        <p class="book-rating">⭐⭐⭐⭐⭐ (4.8/5)</p>
+                        <p class="book-description">A classic American novel of the Jazz Age.</p>
+                        <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                                onclick="addToReadingList('book1', 'The Great Gatsby', 'F. Scott Fitzgerald')">
+                            Read Online
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Book 2 -->
+                <div class="book-card">
+                    <div class="book-cover">📕</div>
+                    <div class="book-info">
+                        <h3 class="book-title">To Kill a Mockingbird</h3>
+                        <p class="book-author">Harper Lee</p>
+                        <p class="book-rating">⭐⭐⭐⭐⭐ (4.9/5)</p>
+                        <p class="book-description">A gripping tale of racial injustice and childhood innocence.</p>
+                        <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                                onclick="addToReadingList('book2', 'To Kill a Mockingbird', 'Harper Lee')">
+                            Read Online
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Book 3 -->
+                <div class="book-card">
+                    <div class="book-cover">📗</div>
+                    <div class="book-info">
+                        <h3 class="book-title">1984</h3>
+                        <p class="book-author">George Orwell</p>
+                        <p class="book-rating">⭐⭐⭐⭐ (4.7/5)</p>
+                        <p class="book-description">A dystopian social science fiction novel.</p>
+                        <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                                onclick="addToReadingList('book3', '1984', 'George Orwell')">
+                            Read Online
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Book 4 -->
+                <div class="book-card">
+                    <div class="book-cover">📙</div>
+                    <div class="book-info">
+                        <h3 class="book-title">Pride and Prejudice</h3>
+                        <p class="book-author">Jane Austen</p>
+                        <p class="book-rating">⭐⭐⭐⭐⭐ (4.8/5)</p>
+                        <p class="book-description">A timeless romance and social commentary.</p>
+                        <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                                onclick="addToReadingList('book4', 'Pride and Prejudice', 'Jane Austen')">
+                            Read Online
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Book 5 -->
+                <div class="book-card">
+                    <div class="book-cover">📔</div>
+                    <div class="book-info">
+                        <h3 class="book-title">The Catcher in the Rye</h3>
+                        <p class="book-author">J.D. Salinger</p>
+                        <p class="book-rating">⭐⭐⭐⭐ (4.6/5)</p>
+                        <p class="book-description">A coming-of-age story with unique narrative voice.</p>
+                        <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                                onclick="addToReadingList('book5', 'The Catcher in the Rye', 'J.D. Salinger')">
+                            Read Online
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Book 6 -->
+                <div class="book-card">
+                    <div class="book-cover">📓</div>
+                    <div class="book-info">
+                        <h3 class="book-title">The Great Expectations</h3>
+                        <p class="book-author">Charles Dickens</p>
+                        <p class="book-rating">⭐⭐⭐⭐ (4.7/5)</p>
+                        <p class="book-description">An unforgettable story of ambition and growth.</p>
+                        <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                                onclick="addToReadingList('book6', 'The Great Expectations', 'Charles Dickens')">
+                            Read Online
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="features mt-40 mb-40">
+            <h2 class="section-title mb-40">Why Choose BookStore?</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🆓 100% Free</h3>
+                    <p>Read thousands of classic books completely free with no hidden costs or subscriptions.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📚 Vast Library</h3>
+                    <p>Browse our extensive collection of books across all genres and discover your next favorite.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💻 Read Anywhere</h3>
+                    <p>Access your reading list from any device - desktop, tablet, or mobile.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Track Progress</h3>
+                    <p>Keep track of your reading progress with our intuitive reading list and progress bar.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About BookStore</h3>
+                <p>Your trusted online destination for books of all genres and interests. Discover, read, and enjoy great literature.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="shop.html">Shop Books</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@bookstore.com</p>
+                <p>Phone: 1-800-BOOKS-01</p>
+                <p>Address: 123 Book Street, Reading City, RC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BookStore. All rights reserved. Built with ❤️ for book lovers.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

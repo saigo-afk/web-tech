@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - BookStore Admin</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <h1>📚 BookStore Admin Dashboard</h1>
+            <div class="admin-user-menu">
+                <span id="adminUsername">Admin</span>
+                <button class="btn btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="manage-books.html">Manage Books</a></li>
+            <li><a href="manage-users.html">Manage Users</a></li>
+            <li><a href="manage-reading-lists.html">Reading Lists</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="settings.html" class="active">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Admin Main Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+            <h2>Admin Settings</h2>
+
+            <!-- Site Settings -->
+            <section class="admin-section settings-section">
+                <h3>Site Configuration</h3>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label>Site Name</label>
+                        <input type="text" value="BookStore Platform" placeholder="Enter site name">
+                    </div>
+                    <div class="form-group">
+                        <label>Site Description</label>
+                        <textarea placeholder="Enter site description">A free reading platform where bookworms can discover and read their favorite books online.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Support Email</label>
+                        <input type="email" value="support@bookstore.com" placeholder="Enter support email">
+                    </div>
+                    <div class="form-group">
+                        <label>Max Books per User</label>
+                        <input type="number" value="50" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Maintenance Mode</label>
+                        <select>
+                            <option>Off</option>
+                            <option>On</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="saveSiteSettings(event)">💾 Save Changes</button>
+                </form>
+            </section>
+
+            <!-- User Management Settings -->
+            <section class="admin-section settings-section">
+                <h3>User Management</h3>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label>Allow New User Registration</label>
+                        <select>
+                            <option selected>Enabled</option>
+                            <option>Disabled</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>User Verification Required</label>
+                        <select>
+                            <option>Yes</option>
+                            <option selected>No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Inactive User Days Before Deactivation</label>
+                        <input type="number" value="180" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Maximum Login Attempts</label>
+                        <input type="number" value="5" min="1">
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="saveUserSettings(event)">💾 Save Changes</button>
+                </form>
+            </section>
+
+            <!-- Content Settings -->
+            <section class="admin-section settings-section">
+                <h3>Content Settings</h3>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label>Items per Page</label>
+                        <input type="number" value="12" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Book Categories</label>
+                        <input type="text" value="Fiction, Non-Fiction, Mystery, Romance" placeholder="Comma-separated categories">
+                    </div>
+                    <div class="form-group">
+                        <label>Enable Book Reviews</label>
+                        <select>
+                            <option selected>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Enable Ratings</label>
+                        <select>
+                            <option selected>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="saveContentSettings(event)">💾 Save Changes</button>
+                </form>
+            </section>
+
+            <!-- Admin Account Settings -->
+            <section class="admin-section settings-section">
+                <h3>Admin Account</h3>
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label>Current Username</label>
+                        <input type="text" value="admin" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" placeholder="••••••••" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" placeholder="Enter new password" id="newPassword">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" placeholder="Confirm new password" id="confirmPassword">
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="updateAdminPassword(event)">🔐 Change Password</button>
+                </form>
+            </section>
+
+            <!-- Backup & Maintenance -->
+            <section class="admin-section settings-section">
+                <h3>Backup & Maintenance</h3>
+                <div class="maintenance-buttons">
+                    <button class="btn btn-action edit large" onclick="backupData()">📥 Backup Database</button>
+                    <button class="btn btn-action edit large" onclick="clearCache()">🗑️ Clear Cache</button>
+                    <button class="btn btn-action edit large" onclick="generateReport()">📊 Generate Report</button>
+                    <button class="btn btn-action delete large" onclick="resetDatabase()">⚠️ Reset Database</button>
+                </div>
+                <div class="backup-info">
+                    <p><strong>Last Backup:</strong> 2025-12-15 14:30:00</p>
+                    <p><strong>Backup Size:</strong> 2.4 MB</p>
+                    <p><strong>Database Status:</strong> <span style="color: #2ecc71;">✓ Healthy</span></p>
+                </div>
+            </section>
+
+            <!-- System Info -->
+            <section class="admin-section settings-section">
+                <h3>System Information</h3>
+                <table class="info-table">
+                    <tr>
+                        <td>Platform Version</td>
+                        <td>1.0.0</td>
+                    </tr>
+                    <tr>
+                        <td>PHP Version</td>
+                        <td>8.1.0</td>
+                    </tr>
+                    <tr>
+                        <td>Database Type</td>
+                        <td>MySQL 8.0</td>
+                    </tr>
+                    <tr>
+                        <td>Server OS</td>
+                        <td>Linux Ubuntu 22.04</td>
+                    </tr>
+                    <tr>
+                        <td>Total Books</td>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <td>Total Users</td>
+                        <td>342</td>
+                    </tr>
+                    <tr>
+                        <td>Total Reading Lists</td>
+                        <td>1,247</td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <!-- Admin Footer -->
+    <footer class="admin-footer">
+        <p>&copy; 2024 BookStore Admin Panel. All rights reserved.</p>
+    </footer>
+
+    <style>
+        .settings-section {
+            margin-bottom: 30px;
+        }
+
+        .settings-form {
+            background: #34495e;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ecf0f1;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #2c3e50;
+            border-radius: 5px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-group input[readonly] {
+            background: #1a252f;
+            cursor: not-allowed;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .maintenance-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .maintenance-buttons .btn.large {
+            padding: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .backup-info {
+            background: #34495e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .backup-info p {
+            margin: 8px 0;
+            color: #bdc3c7;
+        }
+
+        .info-table {
+            width: 100%;
+            background: #34495e;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .info-table tr {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .info-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .info-table td {
+            padding: 15px;
+            color: #ecf0f1;
+        }
+
+        .info-table td:first-child {
+            font-weight: 500;
+            width: 50%;
+        }
+
+        .info-table td:last-child {
+            color: #3498db;
+            text-align: right;
+        }
+
+        @media (max-width: 768px) {
+            .maintenance-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                font-size: 16px;
+            }
+        }
+    </style>
+
+    <script>
+        // Check if admin is logged in
+        function checkAdminLogin() {
+            if (!localStorage.getItem('adminLoggedIn')) {
+                window.location.href = 'admin-login.html';
+            } else {
+                document.getElementById('adminUsername').textContent = 
+                    localStorage.getItem('adminUsername') || 'Admin';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            localStorage.removeItem('adminUsername');
+            window.location.href = 'admin-login.html';
+        }
+
+        function saveSiteSettings(e) {
+            e.preventDefault();
+            alert('✅ Site settings saved successfully!');
+        }
+
+        function saveUserSettings(e) {
+            e.preventDefault();
+            alert('✅ User settings saved successfully!');
+        }
+
+        function saveContentSettings(e) {
+            e.preventDefault();
+            alert('✅ Content settings saved successfully!');
+        }
+
+        function updateAdminPassword(e) {
+            e.preventDefault();
+            const newPass = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+            
+            if (!newPass || !confirmPass) {
+                alert('⚠️ Please fill in all password fields');
+                return;
+            }
+            
+            if (newPass !== confirmPass) {
+                alert('⚠️ Passwords do not match');
+                return;
+            }
+            
+            alert('✅ Password changed successfully!');
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        function backupData() {
+            alert('✅ Database backup completed!\nSize: 2.4 MB\nLocation: backups/backup_2025-12-15.sql');
+        }
+
+        function clearCache() {
+            alert('✅ Cache cleared successfully!');
+        }
+
+        function generateReport() {
+            alert('✅ Report generated!\nFile: reports/monthly_report_12_2025.pdf');
+        }
+
+        function resetDatabase() {
+            if (confirm('⚠️ WARNING: This will delete all data! Are you sure?')) {
+                if (confirm('This action cannot be undone. Type "RESET" to confirm.')) {
+                    alert('✅ Database reset completed!');
+                }
+            }
+        }
+
+        window.addEventListener('load', checkAdminLogin);
+    </script>
+</body>
+</html>

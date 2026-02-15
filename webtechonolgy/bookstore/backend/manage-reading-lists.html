@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Reading Lists - BookStore Admin</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <h1>📚 BookStore Admin Dashboard</h1>
+            <div class="admin-user-menu">
+                <span id="adminUsername">Admin</span>
+                <button class="btn btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="manage-books.html">Manage Books</a></li>
+            <li><a href="manage-users.html">Manage Users</a></li>
+            <li><a href="manage-reading-lists.html" class="active">Reading Lists</a></li>
+            <li><a href="analytics.html">Analytics</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Admin Main Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+            <h2>User Reading Lists</h2>
+
+            <!-- Search & Filter -->
+            <div class="admin-filters">
+                <input type="text" placeholder="Search user or book..." class="search-input" id="searchInput" onkeyup="filterReadingLists()">
+                <select class="filter-select" id="statusFilter" onchange="filterReadingLists()">
+                    <option value="">All Status</option>
+                    <option value="reading">Reading</option>
+                    <option value="want">Want to Read</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+
+            <!-- Reading Lists Overview -->
+            <section class="admin-section">
+                <h3>Reading Lists Summary</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Total Books</th>
+                            <th>Currently Reading</th>
+                            <th>Want to Read</th>
+                            <th>Completed</th>
+                            <th>Avg Progress</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="readingListsTableBody">
+                        <tr>
+                            <td>John Doe</td>
+                            <td>5</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>45% <span class="progress-bar-mini" style="width: 45%"></span></td>
+                            <td>
+                                <button class="btn-action edit" onclick="viewUserReading(1)">👁️ View</button>
+                                <button class="btn-action delete" onclick="clearReadingList(1)">🔄 Clear</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>8</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>2</td>
+                            <td>62% <span class="progress-bar-mini" style="width: 62%"></span></td>
+                            <td>
+                                <button class="btn-action edit" onclick="viewUserReading(2)">👁️ View</button>
+                                <button class="btn-action delete" onclick="clearReadingList(2)">🔄 Clear</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mike Johnson</td>
+                            <td>3</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>38% <span class="progress-bar-mini" style="width: 38%"></span></td>
+                            <td>
+                                <button class="btn-action edit" onclick="viewUserReading(3)">👁️ View</button>
+                                <button class="btn-action delete" onclick="clearReadingList(3)">🔄 Clear</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Williams</td>
+                            <td>12</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>78% <span class="progress-bar-mini" style="width: 78%"></span></td>
+                            <td>
+                                <button class="btn-action edit" onclick="viewUserReading(4)">👁️ View</button>
+                                <button class="btn-action delete" onclick="clearReadingList(4)">🔄 Clear</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Robert Brown</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>15% <span class="progress-bar-mini" style="width: 15%"></span></td>
+                            <td>
+                                <button class="btn-action edit" onclick="viewUserReading(5)">👁️ View</button>
+                                <button class="btn-action delete" onclick="clearReadingList(5)">🔄 Clear</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Reading Activity -->
+            <section class="admin-section">
+                <h3>Recent Reading Activity</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Book Title</th>
+                            <th>Action</th>
+                            <th>Progress</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>The Great Gatsby</td>
+                            <td><span class="status-badge success">Completed</span></td>
+                            <td>100%</td>
+                            <td>2025-12-15</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>To Kill a Mockingbird</td>
+                            <td><span class="status-badge pending">Reading</span></td>
+                            <td>65%</td>
+                            <td>2025-12-14</td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Williams</td>
+                            <td>1984</td>
+                            <td><span class="status-badge pending">Reading</span></td>
+                            <td>85%</td>
+                            <td>2025-12-14</td>
+                        </tr>
+                        <tr>
+                            <td>Mike Johnson</td>
+                            <td>Jane Eyre</td>
+                            <td><span class="status-badge pending">Want to Read</span></td>
+                            <td>0%</td>
+                            <td>2025-12-13</td>
+                        </tr>
+                        <tr>
+                            <td>Robert Brown</td>
+                            <td>Sapiens</td>
+                            <td><span class="status-badge pending">Want to Read</span></td>
+                            <td>0%</td>
+                            <td>2025-12-12</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <!-- Admin Footer -->
+    <footer class="admin-footer">
+        <p>&copy; 2024 BookStore Admin Panel. All rights reserved.</p>
+    </footer>
+
+    <style>
+        .progress-bar-mini {
+            display: inline-block;
+            height: 20px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 10px;
+            margin-left: 10px;
+            min-width: 50px;
+        }
+    </style>
+
+    <script>
+        // Check if admin is logged in
+        function checkAdminLogin() {
+            if (!localStorage.getItem('adminLoggedIn')) {
+                window.location.href = 'admin-login.html';
+            } else {
+                document.getElementById('adminUsername').textContent = 
+                    localStorage.getItem('adminUsername') || 'Admin';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('adminLoggedIn');
+            localStorage.removeItem('adminUsername');
+            window.location.href = 'admin-login.html';
+        }
+
+        function viewUserReading(id) {
+            alert('Viewing reading list for user #' + id);
+        }
+
+        function clearReadingList(id) {
+            if (confirm('Are you sure you want to clear this user\'s reading list?')) {
+                alert('✅ Reading list cleared!');
+            }
+        }
+
+        function filterReadingLists() {
+            // Filter logic
+        }
+
+        window.addEventListener('load', checkAdminLogin);
+    </script>
+</body>
+</html>

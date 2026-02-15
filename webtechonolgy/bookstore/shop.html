@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - BookStore</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">📚 BookStore</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Browse</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li>
+                        <a href="reading-list.html" class="cart-icon">
+                            📖
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                    <li><a href="backend/admin-login.html" style="color: #e74c3c; font-weight: bold;">🔐 Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Our Book Collection</h1>
+        <p>Thousands of Free Books Available to Read Online</p>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;">
+            <h2 class="section-title" style="margin: 0;">Browse Books</h2>
+            <div>
+                <label for="category-filter" style="color: var(--primary-color); font-weight: bold; margin-right: 10px;">Filter by Category:</label>
+                <select id="category-filter" onchange="filterBooks(this.value)" style="padding: 10px; border: 1px solid var(--border-color); border-radius: 4px;">
+                    <option value="all">All Categories</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="romance">Romance</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="books-grid">
+            <!-- Fiction Books -->
+            <div class="book-card" data-category="fiction">
+                <div class="book-cover">📖</div>
+                <div class="book-info">
+                    <h3 class="book-title">The Great Gatsby</h3>
+                    <p class="book-author">F. Scott Fitzgerald</p>
+                    <p class="book-rating">⭐⭐⭐⭐⭐ (4.8/5)</p>
+                    <p class="book-description">A classic American novel of the Jazz Age.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book1', 'The Great Gatsby', 'F. Scott Fitzgerald')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <div class="book-card" data-category="fiction">
+                <div class="book-cover">📕</div>
+                <div class="book-info">
+                    <h3 class="book-title">To Kill a Mockingbird</h3>
+                    <p class="book-author">Harper Lee</p>
+                    <p class="book-rating">⭐⭐⭐⭐⭐ (4.9/5)</p>
+                    <p class="book-description">A gripping tale of racial injustice and childhood innocence.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book2', 'To Kill a Mockingbird', 'Harper Lee')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mystery Books -->
+            <div class="book-card" data-category="mystery">
+                <div class="book-cover">🔍</div>
+                <div class="book-info">
+                    <h3 class="book-title">The Sherlock Holmes Collection</h3>
+                    <p class="book-author">Arthur Conan Doyle</p>
+                    <p class="book-rating">⭐⭐⭐⭐⭐ (4.9/5)</p>
+                    <p class="book-description">Classic detective stories that captivate readers worldwide.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book7', 'The Sherlock Holmes Collection', 'Arthur Conan Doyle')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <div class="book-card" data-category="mystery">
+                <div class="book-cover">🎭</div>
+                <div class="book-info">
+                    <h3 class="book-title">Murder on the Orient Express</h3>
+                    <p class="book-author">Agatha Christie</p>
+                    <p class="book-rating">⭐⭐⭐⭐ (4.7/5)</p>
+                    <p class="book-description">A masterpiece of mystery and suspense.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book8', 'Murder on the Orient Express', 'Agatha Christie')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fiction Books Continued -->
+            <div class="book-card" data-category="fiction">
+                <div class="book-cover">📗</div>
+                <div class="book-info">
+                    <h3 class="book-title">1984</h3>
+                    <p class="book-author">George Orwell</p>
+                    <p class="book-rating">⭐⭐⭐⭐ (4.7/5)</p>
+                    <p class="book-description">A dystopian social science fiction novel.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book3', '1984', 'George Orwell')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <!-- Romance Books -->
+            <div class="book-card" data-category="romance">
+                <div class="book-cover">💕</div>
+                <div class="book-info">
+                    <h3 class="book-title">Pride and Prejudice</h3>
+                    <p class="book-author">Jane Austen</p>
+                    <p class="book-rating">⭐⭐⭐⭐⭐ (4.8/5)</p>
+                    <p class="book-description">A timeless romance and social commentary.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book4', 'Pride and Prejudice', 'Jane Austen')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <div class="book-card" data-category="fiction">
+                <div class="book-cover">📔</div>
+                <div class="book-info">
+                    <h3 class="book-title">The Catcher in the Rye</h3>
+                    <p class="book-author">J.D. Salinger</p>
+                    <p class="book-rating">⭐⭐⭐⭐ (4.6/5)</p>
+                    <p class="book-description">A coming-of-age story with unique narrative voice.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book5', 'The Catcher in the Rye', 'J.D. Salinger')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <!-- Non-Fiction Books -->
+            <div class="book-card" data-category="non-fiction">
+                <div class="book-cover">💡</div>
+                <div class="book-info">
+                    <h3 class="book-title">Sapiens</h3>
+                    <p class="book-author">Yuval Noah Harari</p>
+                    <p class="book-rating">⭐⭐⭐⭐⭐ (4.8/5)</p>
+                    <p class="book-description">A brief history of humankind from the Stone Age to the modern day.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book9', 'Sapiens', 'Yuval Noah Harari')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <div class="book-card" data-category="non-fiction">
+                <div class="book-cover">🧠</div>
+                <div class="book-info">
+                    <h3 class="book-title">Thinking, Fast and Slow</h3>
+                    <p class="book-author">Daniel Kahneman</p>
+                    <p class="book-rating">⭐⭐⭐⭐ (4.7/5)</p>
+                    <p class="book-description">Explores the two systems that drive the way we think.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book10', 'Thinking, Fast and Slow', 'Daniel Kahneman')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <div class="book-card" data-category="fiction">
+                <div class="book-cover">📓</div>
+                <div class="book-info">
+                    <h3 class="book-title">The Great Expectations</h3>
+                    <p class="book-author">Charles Dickens</p>
+                    <p class="book-rating">⭐⭐⭐⭐ (4.7/5)</p>
+                    <p class="book-description">An unforgettable story of ambition and growth.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book6', 'The Great Expectations', 'Charles Dickens')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <!-- More Books -->
+            <div class="book-card" data-category="non-fiction">
+                <div class="book-cover">📚</div>
+                <div class="book-info">
+                    <h3 class="book-title">Atomic Habits</h3>
+                    <p class="book-author">James Clear</p>
+                    <p class="book-rating">⭐⭐⭐⭐⭐ (4.8/5)</p>
+                    <p class="book-description">Transform your habits and achieve remarkable results.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book11', 'Atomic Habits', 'James Clear')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+
+            <div class="book-card" data-category="romance">
+                <div class="book-cover">💘</div>
+                <div class="book-info">
+                    <h3 class="book-title">Jane Eyre</h3>
+                    <p class="book-author">Charlotte Brontë</p>
+                    <p class="book-rating">⭐⭐⭐⭐⭐ (4.8/5)</p>
+                    <p class="book-description">A powerful gothic romance novel of the 19th century.</p>
+                    <button class="btn btn-secondary btn-small add-to-cart-btn" 
+                            onclick="addToReadingList('book12', 'Jane Eyre', 'Charlotte Brontë')">
+                        Read Online
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About BookStore</h3>
+                <p>Your trusted online destination for books of all genres and interests. Discover, read, and enjoy great literature.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="shop.html">Shop Books</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Wishlist</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@bookstore.com</p>
+                <p>Phone: 1-800-BOOKS-01</p>
+                <p>Address: 123 Book Street, Reading City, RC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BookStore. All rights reserved. Built with ❤️ for book lovers.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

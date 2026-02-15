@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - BookStore</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-box">
+            <h1>📚 BookStore Admin</h1>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label for="username">Admin Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Admin Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="remember"> Remember me
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-login">Login to Dashboard</button>
+            </form>
+
+            <div class="login-footer">
+                <p>Demo Credentials:</p>
+                <p><strong>Username:</strong> admin | <strong>Password:</strong> admin123</p>
+                <hr>
+                <p><a href="../index.html">← Back to Main Site</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleAdminLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Demo authentication
+            if (username === 'admin' && password === 'admin123') {
+                localStorage.setItem('adminLoggedIn', 'true');
+                localStorage.setItem('adminUsername', username);
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('❌ Invalid credentials! Use admin / admin123');
+                document.getElementById('password').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
